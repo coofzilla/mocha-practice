@@ -1,5 +1,4 @@
 const assert = require("assert");
-const { beforeEach } = require("mocha");
 const User = require("../src/user");
 
 describe("Deleting a user", async () => {
