@@ -10,7 +10,7 @@ describe("Deleting a user", async () => {
   });
 
   it("modal instance remove", async () => {
-    await joe.remove();
+    await joe.deleteOne();
     const user = await User.findOne({ name: "Joe" });
     assert(user === null);
   });

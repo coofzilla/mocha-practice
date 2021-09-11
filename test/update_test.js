@@ -26,4 +26,16 @@ describe("Updating records", async () => {
     await joe.updateOne({ name: "Alex" });
     assertName(await joe.save());
   });
+
+  it("A model class can update", async () => {
+    assertName(await User.updateMany({ name: "Joe" }, { name: "Alex" }));
+  });
+
+  it("A model class can update one record", async () => {
+    assertName(await User.updateOne({ name: "Joe" }, { name: "Alex" }));
+  });
+
+  it("A model class can find an ID and update", async () => {
+    assertName(await joe._id, { name: "Alex" });
+  });
 });
