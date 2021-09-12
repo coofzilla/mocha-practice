@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: [true, "Name is required"],
+  },
   postCount: Number,
 });
 

@@ -44,6 +44,5 @@ describe("Updating records", async () => {
     await User.updateMany({ name: "Joe" }, { $inc: { postCount: 10 } });
     const user = await User.findOne({ name: "Joe" });
     assert(user.postCount === 10);
-    console.log(user);
   });
 });
