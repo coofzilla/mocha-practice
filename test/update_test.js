@@ -6,7 +6,7 @@ describe("Updating records", () => {
   let joe;
 
   beforeEach(async () => {
-    joe = await new User({ name: "Joe", postCount: 0 });
+    joe = await new User({ name: "Joe", likes: 0 });
     await joe.save();
   });
 
@@ -40,9 +40,9 @@ describe("Updating records", () => {
     assertName(await joe._id, { name: "Alex" });
   });
 
-  xit("a user can have their postCount incremented by 1", async () => {
-    await User.updateMany({ name: "Joe" }, { $inc: { postCount: 10 } });
+  it("a user can have their likes incremented by 1", async () => {
+    await User.updateMany({ name: "Joe" }, { $inc: { likes: 10 } });
     const user = await User.findOne({ name: "Joe" });
-    assert(user.postCount === 10);
+    assert(user.likes === 10);
   });
 });
