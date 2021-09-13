@@ -1,7 +1,7 @@
 const assert = require("assert");
 const User = require("../src/user");
 
-describe("Subdocuments", async () => {
+describe("Subdocuments",  () => {
   it("can create a subdocument", async () => {
     const joe = await new User({
       name: "Joe",

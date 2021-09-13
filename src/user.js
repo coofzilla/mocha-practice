@@ -11,8 +11,13 @@ const UserSchema = new Schema({
     },
     required: [true, "Name is required"],
   },
-  postCount: Number,
   posts: [PostSchema],
+  likes: Number,
+});
+//Virtual is a property that is not stored in MongoDB.
+//Virtuals are typically used for computed properties on documents.
+UserSchema.virtual("postCount").get(function () {
+  return this.posts.length;
 });
 
 //name of collection is string auto appends an s at end
