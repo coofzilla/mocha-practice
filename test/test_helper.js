@@ -12,6 +12,7 @@ before(async () => {
     });
 });
 
+//this is why your data insn't saving
 beforeEach(async () => {
   mongoose.connection.collections.users.drop(() => {
     //Ready to run next test

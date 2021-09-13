@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const PostSchema = require("./post");
 
 const UserSchema = new Schema({
   name: {
@@ -11,6 +12,7 @@ const UserSchema = new Schema({
     required: [true, "Name is required"],
   },
   postCount: Number,
+  posts: [PostSchema],
 });
 
 //name of collection is string auto appends an s at end
