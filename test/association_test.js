@@ -25,4 +25,24 @@ describe("Associations", () => {
     const user = await User.findOne({ name: "Joe" }).populate("blogPosts");
     assert((user.blogPosts[0].title = "Joe?"));
   });
+
+  it("saves a full relation tree, all of the data", async () => {
+    const user = await User.findOne({ name: "Joe" }).populate({
+      path: "blogPosts",
+      populate: {
+        path: "comments",
+        model: "comment",
+        populate: {
+          path: "user",
+          model: "user",
+        },
+      },
+    });
+
+    assert(user.name === "Joe");
+    assert(user.blogPosts[0].title === "Joe?");
+    assert(user.blogPosts[0].content === "JoeMomma");
+    assert(user.blogPosts[0].comments[0].content === "So funny..");
+    assert(user.blogPosts[0].comments[0].user.name === "Joe");
+  });
 });
