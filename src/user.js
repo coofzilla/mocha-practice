@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const PostSchema = require("./post");
 
+//posts exits f/subdocument example
+//blog posts exist f/ref example
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -13,9 +15,15 @@ const UserSchema = new Schema({
   },
   posts: [PostSchema],
   likes: Number,
+  blogPosts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "blogPost",
+    },
+  ],
 });
 //Virtual is a property that is not stored in MongoDB.
-//Virtuals are typically used for computed properties on documents.
+//typically used for computed properties on documents.
 UserSchema.virtual("postCount").get(function () {
   return this.posts.length;
 });

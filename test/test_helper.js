@@ -13,8 +13,12 @@ before(async () => {
 });
 
 //this is why your data insn't saving
+//mongoose normalizes by lowercasing everything
 beforeEach(async () => {
-  mongoose.connection.collections.users.drop(() => {
-    //Ready to run next test
+  const { users, comments, blogposts } = mongoose.connection.collections;
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop();
+    });
   });
 });
