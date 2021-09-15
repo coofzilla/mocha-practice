@@ -28,6 +28,18 @@ UserSchema.virtual("postCount").get(function () {
   return this.posts.length;
 });
 
+//delete all blog posts associated w/user
+//To register updateOne or deleteOne middleware as document middleware, use schema.pre('updateOne', { document: true, query: false }).
+UserSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function () {
+    const BlogPost = mongoose.model("blogPost");
+
+    await BlogPost.deleteMany({ _id: { $in: this.blogPosts } });
+  }
+);
+
 //name of collection is string auto appends an s at end
 //this is also how we create a new model
 const User = mongoose.model("user", UserSchema);
